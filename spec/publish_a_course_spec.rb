@@ -97,6 +97,13 @@ RSpec.describe "Publish a course", type: :feature do
     end
     click_on "Update GCSEs and equivalency tests"
 
+    # Publish and Open course
     click_on "Publish course"
+    expect(page).to have_content("Your course has been published.")
+
+    click_on "Open course"
+    expect(page).to have_content("Are you sure you want to open this course?")
+    click_on "Open course"
+    expect(page).to have_content("Course opened")
   end
 end
