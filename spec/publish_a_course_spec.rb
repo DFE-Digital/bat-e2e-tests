@@ -105,5 +105,36 @@ RSpec.describe "Publish a course", type: :feature do
     expect(page).to have_content("Are you sure you want to open this course?")
     click_on "Open course"
     expect(page).to have_content("Course opened")
+
+    # View on Find
+    click_on "View on Find"
+    expect(page.find(".govuk-heading-xl ")).to have_content(course_name)
+
+    course_code = course_name.gsub("Primary with geography and history (", "").gsub(")", "")
+    find_course_regex = /https:\/\/qa.find-postgraduate-teacher-training.service.gov.uk\/course\/\S*\/#{course_code}/
+    expect(current_url).to match(find_course_regex)
+
+    # Find the course on find
+    visit "https://qa.find-postgraduate-teacher-training.service.gov.uk/"
+    expect(page).to have_content("Find courses by location or by training provider")
+
+    choose "Across England"
+    click_on "Continue"
+
+    expect(page).to have_content("Which age group do you want to teach?")
+    choose "Primary"
+    click_on "Continue"
+
+    expect(page).to have_content("Primary courses with subject specialisms")
+    check "Primary with geography and history"
+    click_on "Continue"
+
+    expect(page).to have_content("Visa sponsorship")
+    choose "No"
+    click_on "Find courses"
+
+    expect(page).to have_content(course_name)
+    click_on course_name
+    expect(current_url).to match(find_course_regex)
   end
 end
