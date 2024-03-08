@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "capybara"
 gem "dotenv"
+gem "pry"
 gem "rspec"
 gem "selenium-webdriver"
 

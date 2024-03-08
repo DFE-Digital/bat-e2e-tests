@@ -40,6 +40,13 @@ RSpec.describe "Publish a course", type: :feature do
     click_on "Add course"
 
     expect(page).to have_content("Your course has been created")
-    expect(page).to have_content("Primary with geography and history")
+    within("section[data-qa='courses__table-section']") do
+      course = page.all(".govuk-table__row").find do |row|
+        row.text.include?("Primary with geography and history") &&
+          row.text.include?("Draft") &&
+          row.text.include?("No - still in draft")
+      end
+      _course_name = course.all("td")[0].text.split("\n").first
+    end
   end
 end
