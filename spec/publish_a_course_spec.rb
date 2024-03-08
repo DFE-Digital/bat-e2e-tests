@@ -39,6 +39,7 @@ RSpec.describe "Publish a course", type: :feature do
 
     click_on "Add course"
 
+    course_name = ""
     expect(page).to have_content("Your course has been created")
     within("section[data-qa='courses__table-section']") do
       course = page.all(".govuk-table__row").find do |row|
@@ -46,7 +47,56 @@ RSpec.describe "Publish a course", type: :feature do
           row.text.include?("Draft") &&
           row.text.include?("No - still in draft")
       end
-      _course_name = course.all("td")[0].text.split("\n").first
+      course_name = course.all("td")[0].text.split("\n").first
+      click_on course_name
     end
+
+    expect(page.find(".govuk-heading-l ")).to have_content(course_name)
+
+    # Fill in course information
+
+    # About this course
+
+    # Course information
+    within("div[data-qa='enrichment__about_course']") do
+      click_on "Change"
+    end
+    expect(page.find(".govuk-heading-l ")).to have_content("Course information")
+    fill_in "About this course", with: Faker::Lorem.sentence(word_count: 300)
+    fill_in "Interview process (optional)", with: Faker::Lorem.sentence(word_count: 200)
+    fill_in "School placements", with: Faker::Lorem.sentence(word_count: 300)
+    click_on "Update course information"
+
+    # Course length and fees
+    within("div[data-qa='enrichment__course_length']") do
+      click_on "Change"
+    end
+    expect(page.find(".govuk-heading-l ")).to have_content("Course length and fees")
+    choose "1 year"
+    fill_in "Fee for UK students", with: "250"
+    fill_in "Fee for international students (optional)", with: "500"
+    fill_in "Fee details (optional)", with: Faker::Lorem.sentence(word_count: 200)
+    fill_in "Financial support you offer (optional)", with: Faker::Lorem.sentence(word_count: 200)
+    click_on "Update course length and fees"
+
+    # Requirements and eligibility
+    within("div[data-qa='enrichment__degree_grade']") do
+      click_on "Enter degree requirements"
+    end
+    choose "No"
+    click_on "Save"
+
+    within("div[data-qa='enrichment__accept_pending_gcse']") do
+      click_on "Enter GCSE and equivalency test requirements"
+    end
+
+    page.all("fieldset").each do |fieldset|
+      within(fieldset) do
+        choose "No"
+      end
+    end
+    click_on "Update GCSEs and equivalency tests"
+
+    click_on "Publish course"
   end
 end

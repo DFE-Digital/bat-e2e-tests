@@ -1,7 +1,8 @@
 require "rspec"
 require "capybara/rspec"
 require "dotenv/load"
-require 'pry'
+require "faker"
+require "pry"
 
 Capybara.configure do |capybara|
   capybara.default_driver = if ENV["CI"]

@@ -31,6 +31,8 @@ GEM
     diff-lcs (1.5.1)
     dotenv (3.1.0)
     drb (2.2.1)
+    faker (3.2.3)
+      i18n (>= 1.8.11, < 2)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     json (2.7.1)
@@ -129,6 +131,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   dotenv
+  faker
   pry
   rspec
   rubocop-govuk
