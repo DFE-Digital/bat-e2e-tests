@@ -111,7 +111,7 @@ RSpec.describe "Publish a course", type: :feature do
     expect(page.find(".govuk-heading-xl ")).to have_content(course_name)
 
     course_code = course_name.gsub("Primary with geography and history (", "").gsub(")", "")
-    find_course_regex = /#{ENV.fetch("FIND_URL")}\/course\/\S*\/#{course_code}/
+    find_course_regex = /#{Regexp.escape ENV.fetch("FIND_URL")}\/course\/\S*\/#{course_code}/
     expect(current_url).to match(find_course_regex)
 
     # Find the course on find
