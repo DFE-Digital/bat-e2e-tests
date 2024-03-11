@@ -4,6 +4,12 @@ require "dotenv/load"
 require "faker"
 require "pry"
 
+require_relative "support/notify_helper"
+
+RSpec.configure do |c|
+  c.include NotifyHelper
+end
+
 Capybara.configure do |capybara|
   capybara.default_driver = if ENV["CI"]
                               :selenium_chrome_headless
