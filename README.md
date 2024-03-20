@@ -22,11 +22,11 @@ Whilst we were able to write tests to met the needs of following this journey. W
 
 ## Encountered Issues
 
-1. To test these services we ran our scenarios against the QA environments of each service. Whilst some QA environments allowed us to sign in using personas, others required us to setup and sign in with DfE accounts. This required us to use notify to locate and acquire emails and links which would allow us to access the specific service.
+1. To test these services we ran our scenarios against the QA environments of each service. While the Publish QA environment allowed us to sign in using personas, Apply used 'magic links' for candidate authentication. This required us to use the GOV.UK Notify API to extract the magic links from sent emails which would allow us to sign in successfully.
 
 2. Due to the nature of our tests, we couldn't rely on APIs for testing that a course could be found across the services. We required visual confirmation that a course would appear to a user across the services with the correct information.
 
-3. Given that we were unable to use the IDs of specific records, it was difficult to locate if certain records were visible on a page. We had to resort to using attributes such as name, status, .etc to identify the records we were attempting to locate and test. This again became problematic, as running the tests multiple times produced duplicate records, making the scenario difficult to test.
+3. Given that we were unable to use the IDs of specific records, it was difficult to locate if certain records were visible on a page. We had to resort to using attributes such as name, status, etc. to identify the records we were attempting to locate and test. This again became problematic, as running the tests multiple times produced duplicate records, making the scenario difficult to test.
 
 4. Not knowing the IDs for specific records also meant that we had to loop over elements within the view, in order to identify the record we were trying to locate. We were aware that any changes to classes within the HTML would result in this tests failing, however it was necessary given the limited information we had to find the correct elements on the page.
 
@@ -36,4 +36,4 @@ Whilst we were able to write tests to met the needs of following this journey. W
 
 Date: 20/03/2024
 
-Whilst this project has provided end-to-end testing across the application journey of BAT and its various services. Due to the limitations and restrictions we have encountered, we have decided that it is not beneficial to continue with this project. 
+This project could be valuable in future, but first it'd be necessary to define which environment the tests should run in. There would be little value in using these as integration tests in the QA environment because the integration between Find/Publish and Apply/Manage is already well established and stable. They would be difficult to use as smoke tests because that would require them to run against production, where we can't publish courses and submit real-world applications.
