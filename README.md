@@ -36,4 +36,6 @@ Whilst we were able to write tests to met the needs of following this journey. W
 
 Date: 20/03/2024
 
+Whilst this project has provided end-to-end testing across the application journey of BAT and its various services. Due to the limitations and restrictions we have encountered, we have decided that it is not beneficial to continue with this project.
+
 This project could be valuable in future, but first it'd be necessary to define which environment the tests should run in. There would be little value in using these as integration tests in the QA environment because the integration between Find/Publish and Apply/Manage is already well established and stable. They would be difficult to use as smoke tests because that would require them to run against production, where we can't publish courses and submit real-world applications.
